@@ -1,20 +1,21 @@
 import random
 
 class Jumper:
-    """The person hiding from the Seeker. 
+    """The parachuter with a word to be guessed. 
     
-    The responsibility of Hider is to keep track of its location and distance from the seeker. 
+    The responsibility of Jumper is to have a word and track what has been guessed
     
     Attributes:
-        _location (int): The location of the hider (1-1000).
-        _distance (List[int]): The distance from the seeker.
+        _word (string) - the chosen word 
+        _letters_guessed (list[char]) - a list of the letters that have been guessed 
+        _parachute (list[string]) - list of the pieces of the parachute that are left
     """
 
     def __init__(self):
-        """Constructs a new Hider.
+        """Constructs a new Jumper.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Jumper): An instance of Jumper.
         """
         word_list = ["apple","banana","pear","peach","mango","watermelon","strawberry"]
         self._word = random.choice(word_list)
@@ -25,13 +26,13 @@ class Jumper:
         self._parachute = ["  ___  ", " /___\ "," \   / ","  \ /  ","   O   ","  /|\  ","  / \  ","       ","^^^^^^^"]
     
     def get_parachute(self):
-        """Gets a hint for the seeker.
+        """Gets a the parachute to be displayed.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Jumper): An instance of Jumper.
         
         Returns:
-            string: A hint for the seeker.
+            list[string]: The parachute
         """
         parachute = ""
         for i in self._parachute: 
@@ -39,21 +40,21 @@ class Jumper:
         return parachute
 
     def is_fallen(self):
-        """Whether or not the hider has been found.
+        """Whether or not there's still parachute left.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (jumper): An instance of jumper.
             
         Returns:
-            boolean: True if the hider was found; false if otherwise.
+            boolean: True if the parachute is gone; false if otherwise.
         """
         return (len(self._parachute) == 5)
         
     def check_guess(self, guess):
-        """Watches the seeker by keeping track of how far away it is.
+        """Updates parachute and letters guessed based on the guessed letter.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Jumper): An instance of Jumper.
         """
         in_word = False
         if guess in self._word:
